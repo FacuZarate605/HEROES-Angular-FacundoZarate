@@ -1,27 +1,50 @@
-# RIUFrontendFacundoZarate
+# HeroesApp - Gestión de Super Héroes (Angular 18)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.18.
+Aplicación para administración de héroes desarrollada con Angular 18.2 y Docker.
 
-## Development server
+## 🚀 Primeros Pasos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Requisitos
+- **Docker** (v24+) y **Docker Compose**
+- **Node.js** v20+ (para desarrollo)
+- **Angular CLI** v18.2.18 (`npm install -g @angular/cli`)
 
-## Code scaffolding
+### Ejecución con Docker
+```bash
+# Con Docker Compose 
+docker-compose up -d
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# De forma manual
+docker build -t heroes-app .
+docker run -d -p 80:80 heroes-app # Corre en localhost
+```
 
-## Build
+### 🌟 Características Técnicas
+- Angular 18.2 con Signals
+- Angular Material 18.2.14 para UI
+- Testing con Jasmine/Karma
+- SSR configurado con @angular/ssr
+- Docker con soporte para SSR
+- RxJS 7.8 para manejo de estados
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### 🧱 Stack 
+- Angular 18.2.0	
+- Angular Material 18.2.14 
+- Angular SSR 18.2.18	
+- RxJS 7.8.0 
+- Node.js 20+	
 
-## Running unit tests
+### Scripts 
+```bash
+# Desarrollo
+npm start  # Ejecutar: ng serve
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# Para instalar dependencias
+npm install
 
-## Running end-to-end tests
+# Build producción
+npm run build
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+# Tests con cobertura
+npm test  # Ejecutar: ng test --code-coverage
+```

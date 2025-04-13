@@ -1,0 +1,60 @@
+<h2 mat-dialog-title>
+  {{ isEditMode ? 'Editar Héroe' : 'Agregar Nuevo Héroe' }}
+</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="heroForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline" class="first-field">
+      <mat-label>Nombre del Héroe</mat-label>
+      <input matInput formControlName="name" placeholder="ej: SPIDERMAN" appUppercase>
+      @if (heroForm.get('name')?.hasError('required')) {
+      <mat-error>El nombre es requerido</mat-error>
+      }
+      @if (heroForm.get('name')?.hasError('minlength')) {
+      <mat-error>Mínimo 3 caracteres</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Alias (Opcional)</mat-label>
+      <input matInput formControlName="alias" placeholder="ej: Peter Parker">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Poderes</mat-label>
+      <textarea matInput formControlName="powers" placeholder="Poderes separados con coma"></textarea>
+      @if (heroForm.get('powers')?.hasError('required')) {
+      <mat-error>Los poderes son requeridos</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Publicador</mat-label>
+      <mat-select formControlName="publisher">
+        <mat-option value="Marvel">Marvel</mat-option>
+        <mat-option value="DC">DC</mat-option>
+        <mat-option value="Other">Otro</mat-option>
+      </mat-select>
+      @if (heroForm.get('publisher')?.hasError('required')) {
+      <mat-error>El publicador es requerido</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Primera Aparición</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="firstAppearance">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      @if (heroForm.get('firstAppearance')?.hasError('required')) {
+      <mat-error>Primera aparición es requerida</mat-error>
+      }
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="heroForm.invalid || loading()">
+    {{ isEditMode ? 'Actualizar' : 'Agregar' }} Héroe
+  </button>
+</mat-dialog-actions>

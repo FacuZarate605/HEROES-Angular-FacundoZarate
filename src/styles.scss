@@ -1,0 +1,18 @@
+/* styles.scss temporal */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+  body {
+    background-image: url('/assets/images/fondo.jpg');
+    background-size: cover; 
+    background-position: center;
+    background-attachment: fixed; 
+    background-repeat: no-repeat;
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+  }
+
+.container {
+  padding: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}

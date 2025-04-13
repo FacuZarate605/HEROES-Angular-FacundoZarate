@@ -1,0 +1,62 @@
+<div class="container">
+  <h1>Super Héroes</h1>
+
+  <div class="search-container">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Buscar héroes</mat-label>
+      <input matInput [formControl]="searchControl" placeholder="Escriba el nombre del héroe..." appUppercase>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" class="add-button" (click)="openAddDialog()">
+      <span>Agregar Héroe</span>
+    </button>
+  </div>
+
+  @if (loading()) {
+  <mat-card class="loading-card">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <p>Cargando héroes...</p>
+  </mat-card>
+  } @else {
+  <div class="heroes-grid">
+    @for (hero of paginatedHeroes(); track hero.id) {
+    <mat-card class="hero-card">
+      <img mat-card-image [src]="hero.imageUrl" [alt]="'Imagen de ' + hero.name" class="hero-image">
+      <mat-card-header>
+        <mat-card-title>{{ hero.name }}</mat-card-title>
+        @if (hero.alias) {
+        <mat-card-subtitle>{{ hero.alias }}</mat-card-subtitle>
+        }
+      </mat-card-header>
+
+      <mat-card-content>
+        <p><strong>Poderes:</strong> {{ hero.powers ? (hero.powers | json) : 'Sin poderes' }}</p>
+        <p><strong>Publicador:</strong> {{ hero.publisher || 'Unknown' }}</p>
+        <p><strong>Primera Aparición:</strong> {{ hero.firstAppearance ? (hero.firstAppearance | date:'d \'de\' MMMM
+          \'de\' y') : 'Desconocida' }}</p>
+      </mat-card-content>
+
+      <mat-card-actions align="end" class="card-actions">
+        <button mat-stroked-button color="primary" class="action-button" (click)="openEditDialog(hero)">
+          <span class="button-label">Editar</span>
+        </button>
+
+        <button mat-stroked-button color="warn" class="action-button" (click)="deleteHero(hero.id)">
+          <span class="button-label">Eliminar</span>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    } @empty {
+    <mat-card class="empty-card">
+      <mat-card-content>
+        <p>Héroes no encontrados</p>
+      </mat-card-content>
+    </mat-card>
+    }
+  </div>
+
+  <mat-paginator [length]="filteredHeroes().length" [pageSize]="pageSize()" [pageSizeOptions]="pageSizeOptions"
+    [pageIndex]="pageIndex()" (page)="handlePageEvent($event)" [hidePageSize]="false" [showFirstLastButtons]="true">
+  </mat-paginator>
+  }
+</div>
